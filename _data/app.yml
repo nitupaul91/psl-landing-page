@@ -1,0 +1,33 @@
+name: "UMAX: Looksmax your face with AI"
+description: "The <b>#1 UMAX</b> app. Just Snap & Transform your face with <b>looks maxing</b>."
+full_description_title: '<h3>UMAX - Unlock Your True Looks Potential with a looksmaxing app</h3>'
+key_features: '<ul style="font-size: smaller;">
+    <li><b>Comprehensive Face Analysis</b>: Dive deep into your facial aesthetics with front, angle, and side selfies</li>
+    <li><b>Objective Attractiveness Ratings</b>: Get AI-powered assessments on masculinity, skin quality, jawline, cheekbones, and overall potential</li>
+    <li><b>Face Shape Recognition</b>: Discover your face shape for tailored looks maxing advice</li>
+    <li><b>Eye Detail Analysis</b>: Eye color, type, and canthal tilt - get the lowdown on your eyes</li>
+    <li><b>Personalized Improvement Tips</b>: Tailored suggestions to elevate your facial aesthetics</li>
+    <li><b>Exclusive Looksmaxing Insights</b>: Access cutting-edge looks maxing strategies to maximize your appearance</li>
+</ul>'
+full_description_footer: '
+<h4>Wanna level up your game?</h4>
+<p><a id="download_button_1" href="https://apps.apple.com/us/app/looksmaxxing-ai-face-rating/id6477295133" target="_blank"><b>Download</b></a> our <a id="download_button_2" href="https://apps.apple.com/us/app/looksmaxxing-ai-face-rating/id6477295133" target="_blank"><b>umax app</b></a> and let us help you lil bro!</p>
+'
+#android: https://telegra.ph/Replace-this-link-07-23
+iOS: https://apps.apple.com/us/app/looksmaxxing-ai-face-rating/id6477295133
+#web: https://telegra.ph/Replace-this-link-07-23
+screenshots:
+  - 1.webp
+  - 2.webp
+  - 3.webp
+  - 4.webp
+  - 5.webp
+
+rating:
+  value: 4.9
+  count: 3913
+#companies:
+#  - url: https://telegra.ph/Replace-this-link-07-23
+#    image: androidpolice.png
+#  - url: https://telegra.ph/Replace-this-link-07-23
+#    image: producthunt.png

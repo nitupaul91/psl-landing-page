@@ -1,0 +1,19 @@
+app:
+#  screenshots: Screenshots
+#  description: Description
+#  featured: Featured in
+
+footer:
+  copyright: 🗿 Looksmaxing 2025
+  links:
+    - title: Facebook
+      url: https://www.facebook.com/people/UMAX-Looksmaxing/61556886538060/
+      target: _blank
+    - title: Tiktok
+      url: https://www.tiktok.com/@looksmax.app
+      target: _blank
+    - title: Instagram
+      url: https://ailooksmaxing.app
+      target: _blank
+    - title: Privacy
+      url: /privacy_policy.html

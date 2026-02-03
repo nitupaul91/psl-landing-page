@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rating Card Generator - Looksmaxxing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        h1 {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #fff;
+        }
+
+        .editor-panel {
+            flex: 1;
+            min-width: 300px;
+            background: #2a2a2a;
+            padding: 24px;
+            border-radius: 16px;
+        }
+
+        .preview-panel {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .photo-upload {
+            width: 100%;
+            margin-bottom: 24px;
+        }
+
+        .upload-area {
+            border: 2px dashed #444;
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .upload-area:hover {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.05);
+        }
+
+        .upload-area.has-image {
+            padding: 10px;
+        }
+
+        .upload-area img {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 8px;
+        }
+
+        .upload-text {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .upload-text span {
+            color: #22c55e;
+            font-weight: 500;
+        }
+
+        #photoInput {
+            display: none;
+        }
+
+        .ratings-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .rating-input {
+            background: #333;
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+
+        .rating-input label {
+            display: block;
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 8px;
+            text-transform: capitalize;
+        }
+
+        .rating-input input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            background: #222;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .rating-input input:focus {
+            outline: 2px solid #22c55e;
+        }
+
+        .download-btn {
+            width: 100%;
+            padding: 16px;
+            margin-top: 24px;
+            background: #22c55e;
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .download-btn:hover {
+            background: #16a34a;
+        }
+
+        .download-btn:disabled {
+            background: #444;
+            color: #888;
+            cursor: not-allowed;
+        }
+
+        /* Preview Card Styles */
+        .preview-card {
+            width: 390px;
+            background: #000;
+            border-radius: 20px;
+            padding: 20px;
+            padding-top: 30px;
+        }
+
+        .preview-photo {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preview-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-photo-placeholder {
+            color: #666;
+            font-size: 12px;
+        }
+
+        .app-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 18px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .app-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .app-details {
+            flex: 1;
+        }
+
+        .app-details h2 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+
+        .app-details p {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .download-icon {
+            flex-shrink: 0;
+        }
+
+        .download-icon svg {
+            width: 28px;
+            height: 28px;
+            color: #22c55e;
+        }
+
+        .ratings-preview {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .rating-card {
+            background: #2a2a2a;
+            border-radius: 12px;
+            padding: 12px 18px;
+        }
+
+
+        .rating-card .label {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 6px;
+            text-transform: capitalize;
+        }
+
+        .rating-card .value {
+            font-size: 26px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .rating-card .bar {
+            height: 4px;
+            background: #444;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .rating-card .bar-fill {
+            height: 100%;
+            background: #22c55e;
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+
+        /* Hidden canvas for export */
+        #exportCanvas {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .preview-card {
+                width: 100%;
+                max-width: 390px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Rating Card Generator</h1>
+
+        <div class="editor-panel">
+            <div class="photo-upload">
+                <div class="section-title">Photo</div>
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-text">
+                        <span>Click to upload</span> or drag and drop
+                    </div>
+                </div>
+                <input type="file" id="photoInput" accept="image/*">
+            </div>
+
+            <div class="section-title">Ratings (1-100)</div>
+            <div class="ratings-grid">
+                <div class="rating-input">
+                    <label>Overall</label>
+                    <input type="number" id="overall" min="1" max="100" value="85">
+                </div>
+                <div class="rating-input">
+                    <label>Potential</label>
+                    <input type="number" id="potential" min="1" max="100" value="90">
+                </div>
+                <div class="rating-input">
+                    <label>Masculinity</label>
+                    <input type="number" id="masculinity" min="1" max="100" value="80">
+                </div>
+                <div class="rating-input">
+                    <label>Jawline</label>
+                    <input type="number" id="jawline" min="1" max="100" value="85">
+                </div>
+                <div class="rating-input">
+                    <label>Cheekbones</label>
+                    <input type="number" id="cheekbones" min="1" max="100" value="82">
+                </div>
+                <div class="rating-input">
+                    <label>Skin Quality</label>
+                    <input type="number" id="skinquality" min="1" max="100" value="86">
+                </div>
+            </div>
+
+            <button class="download-btn" id="downloadBtn">Download Image</button>
+        </div>
+
+        <div class="preview-panel">
+            <div class="section-title">Preview</div>
+            <div class="preview-card" id="previewCard">
+                <div class="preview-photo" id="previewPhoto">
+                    <span class="preview-photo-placeholder">No photo</span>
+                </div>
+
+                <div class="app-info">
+                    <div class="app-icon">
+                        <img src="../looksmax-icon.png" alt="Looksmax" id="appIconImg">
+                    </div>
+                    <div class="app-details">
+                        <h2>Looksmaxxing - AI face rating</h2>
+                        <p>Glowup and Looks Max your face</p>
+                    </div>
+                    <div class="download-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="ratings-preview" id="ratingsPreview">
+                    <div class="rating-card" data-rating="overall">
+                        <div class="label">Overall</div>
+                        <div class="value">85</div>
+                        <div class="bar"><div class="bar-fill" style="width: 85%"></div></div>
+                    </div>
+                    <div class="rating-card" data-rating="potential">
+                        <div class="label">Potential</div>
+                        <div class="value">90</div>
+                        <div class="bar"><div class="bar-fill" style="width: 90%"></div></div>
+                    </div>
+                    <div class="rating-card" data-rating="masculinity">
+                        <div class="label">Masculinity</div>
+                        <div class="value">80</div>
+                        <div class="bar"><div class="bar-fill" style="width: 80%"></div></div>
+                    </div>
+                    <div class="rating-card" data-rating="jawline">
+                        <div class="label">Jawline</div>
+                        <div class="value">85</div>
+                        <div class="bar"><div class="bar-fill" style="width: 85%"></div></div>
+                    </div>
+                    <div class="rating-card" data-rating="cheekbones">
+                        <div class="label">Cheekbones</div>
+                        <div class="value">82</div>
+                        <div class="bar"><div class="bar-fill" style="width: 82%"></div></div>
+                    </div>
+                    <div class="rating-card" data-rating="skinquality">
+                        <div class="label">Skin quality</div>
+                        <div class="value">86</div>
+                        <div class="bar"><div class="bar-fill" style="width: 86%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="exportCanvas"></canvas>
+
+    <script>
+        // Elements
+        const uploadArea = document.getElementById('uploadArea');
+        const photoInput = document.getElementById('photoInput');
+        const previewPhoto = document.getElementById('previewPhoto');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const appIconImg = document.getElementById('appIconImg');
+
+        // Rating inputs
+        const ratingIds = ['overall', 'potential', 'masculinity', 'jawline', 'cheekbones', 'skinquality'];
+
+        let uploadedImage = null;
+        let appIconLoaded = false;
+
+        // Check if app icon loads
+        appIconImg.onload = () => { appIconLoaded = true; };
+        appIconImg.onerror = () => {
+            console.warn('App icon failed to load');
+            appIconLoaded = false;
+        };
+
+        // Photo upload handling
+        uploadArea.addEventListener('click', () => photoInput.click());
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#22c55e';
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.borderColor = '#444';
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#444';
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                handleImageUpload(file);
+            }
+        });
+
+        photoInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                handleImageUpload(file);
+            }
+        });
+
+        function handleImageUpload(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                uploadedImage = new Image();
+                uploadedImage.onload = () => {
+                    // Update upload area
+                    uploadArea.innerHTML = `<img src="${e.target.result}" alt="Uploaded">`;
+                    uploadArea.classList.add('has-image');
+
+                    // Update preview
+                    previewPhoto.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+                };
+                uploadedImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Get color based on rating value
+        function getRatingColor(value) {
+            if (value >= 80) return '#22c55e'; // Green
+            if (value >= 40) return '#f59e0b'; // Yellow/Orange
+            return '#ef4444'; // Red
+        }
+
+        // Rating input handling
+        ratingIds.forEach(id => {
+            const input = document.getElementById(id);
+            input.addEventListener('input', () => {
+                let value = parseInt(input.value) || 0;
+                value = Math.max(1, Math.min(100, value));
+
+                const card = document.querySelector(`[data-rating="${id}"]`);
+                if (card) {
+                    card.querySelector('.value').textContent = value;
+                    const barFill = card.querySelector('.bar-fill');
+                    barFill.style.width = `${value}%`;
+                    barFill.style.backgroundColor = getRatingColor(value);
+                }
+            });
+
+            // Initialize colors on load
+            const value = parseInt(input.value) || 0;
+            const card = document.querySelector(`[data-rating="${id}"]`);
+            if (card) {
+                card.querySelector('.bar-fill').style.backgroundColor = getRatingColor(value);
+            }
+        });
+
+        // Download functionality
+        downloadBtn.addEventListener('click', async () => {
+            if (!uploadedImage) {
+                alert('Please upload a photo first');
+                return;
+            }
+
+            const canvas = document.getElementById('exportCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Canvas dimensions (2x for retina)
+            const scale = 2;
+            const width = 390 * scale;
+            const height = 620 * scale;
+
+            canvas.width = width;
+            canvas.height = height;
+
+            // Background
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, width, height);
+
+            // Helper for scaling
+            const s = (val) => val * scale;
+
+            // Draw circular photo
+            const photoSize = s(170);
+            const photoX = width / 2;
+            const photoY = s(100);
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(photoX, photoY, photoSize / 2, 0, Math.PI * 2);
+            ctx.closePath();
+            ctx.clip();
+
+            // Draw image to cover circle
+            const imgAspect = uploadedImage.width / uploadedImage.height;
+            let drawWidth, drawHeight, drawX, drawY;
+
+            if (imgAspect > 1) {
+                drawHeight = photoSize;
+                drawWidth = photoSize * imgAspect;
+                drawX = photoX - drawWidth / 2;
+                drawY = photoY - photoSize / 2;
+            } else {
+                drawWidth = photoSize;
+                drawHeight = photoSize / imgAspect;
+                drawX = photoX - photoSize / 2;
+                drawY = photoY - drawHeight / 2;
+            }
+
+            ctx.drawImage(uploadedImage, drawX, drawY, drawWidth, drawHeight);
+            ctx.restore();
+
+            // App info section
+            const appInfoY = s(210);
+            const iconSize = s(80);
+            const iconX = s(20);
+
+            // App icon (larger, square)
+            if (appIconLoaded) {
+                ctx.save();
+                roundRect(ctx, iconX, appInfoY, iconSize, iconSize, s(18));
+                ctx.clip();
+                ctx.drawImage(appIconImg, iconX, appInfoY, iconSize, iconSize);
+                ctx.restore();
+            }
+
+            // App text (positioned after icon)
+            const textX = iconX + iconSize + s(12);
+            ctx.fillStyle = '#ffffff';
+            ctx.font = `600 ${s(16)}px -apple-system, BlinkMacSystemFont, sans-serif`;
+            ctx.fillText('Looksmaxxing - AI face', textX, appInfoY + s(26));
+            ctx.fillText('rating', textX, appInfoY + s(46));
+
+            ctx.fillStyle = '#888888';
+            ctx.font = `400 ${s(12)}px -apple-system, BlinkMacSystemFont, sans-serif`;
+            ctx.fillText('Glowup and Looks Max your face', textX, appInfoY + s(66));
+
+            // Download icon (on the right side, vertically centered with icon)
+            ctx.strokeStyle = '#22c55e';
+            ctx.lineWidth = s(2);
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+
+            const dlIconSize = s(28);
+            const dlIconX = width - s(20) - dlIconSize;
+            const dlIconY = appInfoY + (iconSize - dlIconSize) / 2;
+
+            // Download icon path
+            ctx.beginPath();
+            ctx.moveTo(dlIconX + dlIconSize * 0.875, dlIconY + dlIconSize * 0.625);
+            ctx.lineTo(dlIconX + dlIconSize * 0.875, dlIconY + dlIconSize * 0.79);
+            ctx.quadraticCurveTo(dlIconX + dlIconSize * 0.875, dlIconY + dlIconSize * 0.875, dlIconX + dlIconSize * 0.79, dlIconY + dlIconSize * 0.875);
+            ctx.lineTo(dlIconX + dlIconSize * 0.21, dlIconY + dlIconSize * 0.875);
+            ctx.quadraticCurveTo(dlIconX + dlIconSize * 0.125, dlIconY + dlIconSize * 0.875, dlIconX + dlIconSize * 0.125, dlIconY + dlIconSize * 0.79);
+            ctx.lineTo(dlIconX + dlIconSize * 0.125, dlIconY + dlIconSize * 0.625);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(dlIconX + dlIconSize * 0.29, dlIconY + dlIconSize * 0.42);
+            ctx.lineTo(dlIconX + dlIconSize * 0.5, dlIconY + dlIconSize * 0.625);
+            ctx.lineTo(dlIconX + dlIconSize * 0.71, dlIconY + dlIconSize * 0.42);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(dlIconX + dlIconSize * 0.5, dlIconY + dlIconSize * 0.625);
+            ctx.lineTo(dlIconX + dlIconSize * 0.5, dlIconY + dlIconSize * 0.125);
+            ctx.stroke();
+
+            // Rating cards
+            const cardsStartY = appInfoY + iconSize + s(20);
+            const cardWidth = s(170);
+            const cardHeight = s(85);
+            const cardGap = s(10);
+            const cardPaddingV = s(12);
+            const cardPaddingH = s(18);
+            const startX = s(20);
+
+            const ratings = [
+                { id: 'overall', label: 'Overall' },
+                { id: 'potential', label: 'Potential' },
+                { id: 'masculinity', label: 'Masculinity' },
+                { id: 'jawline', label: 'Jawline' },
+                { id: 'cheekbones', label: 'Cheekbones' },
+                { id: 'skinquality', label: 'Skin quality' }
+            ];
+
+            ratings.forEach((rating, index) => {
+                const row = Math.floor(index / 2);
+                const col = index % 2;
+                const x = startX + col * (cardWidth + cardGap);
+                const y = cardsStartY + row * (cardHeight + cardGap);
+
+                // Card background
+                ctx.fillStyle = '#2a2a2a';
+                roundRect(ctx, x, y, cardWidth, cardHeight, s(12));
+                ctx.fill();
+
+                // Label
+                ctx.fillStyle = '#888888';
+                ctx.font = `400 ${s(12)}px -apple-system, BlinkMacSystemFont, sans-serif`;
+                ctx.fillText(rating.label, x + cardPaddingH, y + cardPaddingV + s(10));
+
+                // Value
+                const value = parseInt(document.getElementById(rating.id).value) || 0;
+                ctx.fillStyle = '#ffffff';
+                ctx.font = `700 ${s(26)}px -apple-system, BlinkMacSystemFont, sans-serif`;
+                ctx.fillText(value.toString(), x + cardPaddingH, y + cardPaddingV + s(42));
+
+                // Progress bar background
+                const barY = y + cardHeight - cardPaddingV - s(4);
+                const barWidth = cardWidth - cardPaddingH * 2;
+                ctx.fillStyle = '#444444';
+                roundRect(ctx, x + cardPaddingH, barY, barWidth, s(4), s(2));
+                ctx.fill();
+
+                // Progress bar fill (color based on value)
+                ctx.fillStyle = getRatingColor(value);
+                const fillWidth = (barWidth * value) / 100;
+                roundRect(ctx, x + cardPaddingH, barY, fillWidth, s(4), s(2));
+                ctx.fill();
+            });
+
+            // Download
+            const link = document.createElement('a');
+            link.download = 'looksmax-rating-card.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        });
+
+        // Helper function for rounded rectangles
+        function roundRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+        }
+    </script>
+</body>
+</html>

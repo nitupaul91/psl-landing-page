@@ -1,0 +1,125 @@
+---
+layout: default
+---
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "{{ site.data.app.name }}",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "iOS, Android, Web",
+        "url": "https://ailooksmaxing.app/",
+        "image": "https://ailooksmaxing.app/assets/images/appicon.webp",
+        "description": "{{ site.data.app.description | strip_newlines | escape }}",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "{{ site.data.app.rating.value }}",
+            "ratingCount": "{{ site.data.app.rating.count }}"
+        }
+    }
+</script>
+
+<header class="app__header container">
+    <div class="app__logo-wrapper">
+        <img alt="{{ site.data.app.name }} Icon" class="app__logo" src="./assets/images/appicon.webp">
+    </div>
+    <div class="app__infos">
+        <h1 class="app__name">{{ site.data.app.name }}</h1>
+        <p class="app__description">{{ site.data.app.description }}</p>
+
+        <div class="app__buttons app__buttons--desktop">
+            {% if site.data.app.android %}
+            <a class="app__button-play" href="{{ site.data.app.android }}" target="_blank">
+                <img alt="Get on Google Play" src="./assets/images/google-play-badge.png">
+            </a>
+            {% endif %}
+            {% if site.data.app.iOS %}
+            <a class="app__button-ios" href="{{ site.data.app.iOS }}" target="_blank">
+                <img alt="Get on Appstore" src="./assets/images/ios.svg">
+            </a>
+            <div aria-label="Rated {{ site.data.app.rating.value }} out of 5 from {{ site.data.app.rating.count }} reviews"
+                 class="rating-badge">
+                <span aria-hidden="true" class="rating-stars">★★★★★</span>
+                <span class="rating-text"><strong>{{ site.data.app.rating.value }}</strong> · {{ site.data.app.rating.count }} reviews</span>
+            </div>
+            {% endif %}
+            {% if site.data.app.web %}
+            <a class="app__button-web" href="{{ site.data.app.web }}" target="_blank">
+                <img alt="Go to website" src="./assets/images/pwa-badge.png">
+            </a>
+            {% endif %}
+        </div>
+
+    </div>
+</header>
+
+<div class="app__buttons app__buttons--mobile container">
+    {% if site.data.app.android %}
+    <a class="app__button-play" href="{{ site.data.app.android }}" target="_blank">
+        <img alt="Get on Google Play" src="./assets/images/google-play-badge.png">
+    </a>
+    {% endif %}
+    {% if site.data.app.iOS %}
+    <a class="app__button-ios" href="{{ site.data.app.iOS }}" target="_blank">
+        <img alt="Get on Appstore" src="./assets/images/ios.svg">
+    </a>
+    <div aria-label="Rated {{ site.data.app.rating.value }} out of 5 from {{ site.data.app.rating.count }} reviews"
+         class="rating-badge">
+        <span aria-hidden="true" class="rating-stars">★★★★★</span>
+        <span class="rating-text"><strong>{{ site.data.app.rating.value }}</strong> · {{ site.data.app.rating.count }} reviews</span>
+    </div>
+    {% endif %}
+    {% if site.data.app.web %}
+    <a class="app__button-web" href="{{ site.data.app.web }}" target="_blank">
+        <img alt="Go to website" src="./assets/images/pwa-badge.png">
+    </a>
+    {% endif %}
+</div>
+
+<section class="app__screenshots app__section">
+    <div class="container">
+        <h2 class="app__section-title">{{ site.data.strings.app.screenshots }}</h2>
+    </div>
+    <div class="app__screenshots-wrapper container-desktop">
+        <div class="app__screenshots-list">
+            {% for screenshot in site.data.app.screenshots %}
+            <a class="lightbox" href="./assets/images/screenshots/{{ screenshot }}">
+                <img class="app__screenshot" src="./assets/images/screenshots/{{ screenshot }}">
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="app__fulldescription app__section container">
+    <h2 class="app__section-title">{{ site.data.strings.app.description }}</h2>
+    <div class="app__fulldescription-content">
+        {{ site.data.app.full_description_title }}
+    </div>
+    <p class="app__fulldescription-content">Key features:</p>
+    <div class="app__fulldescription-key-features">
+        {{ site.data.app.key_features }}
+    </div>
+    <div class="app__fulldescription-content">
+        {{ site.data.app.full_description_footer }}
+    </div>
+</section>
+
+{% if site.data.app.companies %}
+<section class="app__featured app__section container">
+    <h2 class="app__section-title">{{ site.data.strings.app.featured }}</h2>
+    <div class="app__featured-content">
+        {% for company in site.data.app.companies %}
+        <a class="app__featured-company" href="{{ company.url }}" target="_blank">
+            <img class="app__featured-image" src="./assets/images/companies/{{ company.image }}">
+        </a>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
