@@ -3,30 +3,30 @@
 # This config file contains the config of your webpages
 # You may also want to update /config/webpack.pwa.js in case you want to generate a Progressive Web App
 
-title: "Looksmaxing: UMAX your face with AI"
-email: team@ailooksmaxing.app
+title: "PSL Maxxing: UMAX your face with AI"
+email: hello@aimobileapps.net
 description: 'Ready to level up your face?
 <br/><br/>
-Introducing Umax, the revolutionary app designed with your face rating in mind. Dive deep into the art of looksmaxing with a tool that doesn''t just rate your face but transforms the way you see yourself. From pinpointing your face shape and eye details to scoring your masculinity, skin quality, jawline, cheekbones, and untapped potential, Umax is your ultimate bro in navigating the looks maxing journey.
+Introducing Umax, the revolutionary app designed with your face rating in mind. Dive deep into the art of PSL Maxxing with a tool that doesn''t just rate your face but transforms the way you see yourself. From pinpointing your face shape and eye details to scoring your masculinity, skin quality, jawline, cheekbones, and untapped potential, Umax is your ultimate bro in navigating the looks maxing journey.
 <br/><br/>
 Whether you''re curious about your eye canthal tilt or aiming to max out on your facial aesthetics, Umax has got you covered. Upload a selfie from different angles, and let us help you little bro, with AI-powered insights that decode the secrets behind attractiveness. No more guessing games – it''s time to unlock your best look. Join the Umax revolution now and start your transformation. Your journey to peak attractiveness begins here, with the face rating app that''s all about boosting your confidence and helping you make the most of your unique features. Don''t just fit in, stand out with Umax.
 '
 baseurl: "/app" # the subpath of your site, e.g. /blog
-url: "https://ailooksmaxing.app"
+url: "https://pslmaxxing.com"
 theme_color: '#efeeff'
 #twitter_username: TODO
 #github_username:  TODO
 #author: Prodigy AI
-logo: ./assets/images/large-logo.webp
+logo: ./assets/images/large-logo.png
 #twitter:
 #  username: sandochee
 social:
   name: Prodigy AI
   links:
     # TODO facebook, insta, tiktok
-    - https://ailooksmaxing.app
-    - https://ailooksmaxing.app
-    - https://ailooksmaxing.app
+    - https://pslmaxxing.com
+    - https://pslmaxxing.com
+    - https://pslmaxxing.com
 
 languages: [ "en" ]
 ampdir: amp
@@ -59,5 +59,5 @@ exclude:
   - config
   - optimization-fix
   - optimization-fix-this-file-is-ignored.js
-  - icon.webp
+  - appicon.png
   - docs

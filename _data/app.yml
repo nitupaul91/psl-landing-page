@@ -1,6 +1,6 @@
-name: "UMAX: Looksmax your face with AI"
-description: "The <b>#1 UMAX</b> app. Just Snap & Transform your face with <b>looks maxing</b>."
-full_description_title: '<h3>UMAX - Unlock Your True Looks Potential with a looksmaxing app</h3>'
+name: "PSL Maxxing: Umax your face with AI"
+description: "The <b>#1 PSL Scores</b> app. Just Snap & Transform your face with <b>looks maxing</b>."
+full_description_title: '<h3>PSL Ratings - Unlock Your True Looks Potential with a looksmaxing app</h3>'
 key_features: '<ul style="font-size: smaller;">
     <li><b>Comprehensive Face Analysis</b>: Dive deep into your facial aesthetics with front, angle, and side selfies</li>
     <li><b>Objective Attractiveness Ratings</b>: Get AI-powered assessments on masculinity, skin quality, jawline, cheekbones, and overall potential</li>
@@ -11,17 +11,16 @@ key_features: '<ul style="font-size: smaller;">
 </ul>'
 full_description_footer: '
 <h4>Wanna level up your game?</h4>
-<p><a id="download_button_1" href="https://apps.apple.com/us/app/looksmaxxing-ai-face-rating/id6477295133" target="_blank"><b>Download</b></a> our <a id="download_button_2" href="https://apps.apple.com/us/app/looksmaxxing-ai-face-rating/id6477295133" target="_blank"><b>umax app</b></a> and let us help you lil bro!</p>
+<p><a id="download_button_1" href="https://apps.apple.com/us/app/id6758632891" target="_blank"><b>Download</b></a> our <a id="download_button_2" href="https://apps.apple.com/us/app/looksmaxxing-ai-face-rating/id6477295133" target="_blank"><b>umax app</b></a> and let us help you lil bro!</p>
 '
 #android: https://telegra.ph/Replace-this-link-07-23
-iOS: https://apps.apple.com/us/app/looksmaxxing-ai-face-rating/id6477295133
+iOS: https://apps.apple.com/us/app/id6758632891
 #web: https://telegra.ph/Replace-this-link-07-23
 screenshots:
-  - 1.webp
-  - 2.webp
-  - 3.webp
-  - 4.webp
-  - 5.webp
+  - 1.png
+  - 2.png
+  - 3.png
+  - 4.png
 
 rating:
   value: 4.9

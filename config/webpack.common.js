@@ -11,7 +11,7 @@ module.exports = {
   },
   plugins: [
     new FaviconsWebpackPlugin({
-      logo: './icon.webp',
+      logo: './appicon.png',
       manifest: './config/manifest.json',
       publicPath: './'
     }),
